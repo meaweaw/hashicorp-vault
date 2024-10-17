@@ -15,7 +15,7 @@ RUN mkdir -p /vault/config
 # Copy the Vault configuration file into the container
 COPY vault-config.hcl /vault/config/vault-config.hcl
 
-# Ensure the entrypoint script is executable if you have one
+# Ensure the entrypoint script is executable
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
