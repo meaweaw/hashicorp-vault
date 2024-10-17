@@ -25,7 +25,7 @@ vault login "$ROOT_TOKEN"
 # Optionally: Create a function to save the current configuration
 save_config() {
     # This command will retrieve the current configuration and save it
-    vault read -format=json sys/config > /vault/config/current-config.json
+    vault status -format=json > /vault/config/vault-status.json
     echo "Vault configuration saved."
 }
 
