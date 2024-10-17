@@ -8,3 +8,5 @@ storage "file" {
 }
 
 ui = true
+
+disable_mlock = true
