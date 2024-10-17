@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  vault:
+    container_name: vault
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "root"
+      VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+    ports:
+      - "8200:8200"
+    volumes:
+      - vault_data:/vault/data
+      - vault_logs:/vault/logs
+      - vault_file:/vault/file
+    cap_add:
+      - IPC_LOCK
+    command: vault server -config=/vault/config/vault-config.hcl
+
+volumes:
+  vault_data:
+  vault_logs:
+  vault_file:
