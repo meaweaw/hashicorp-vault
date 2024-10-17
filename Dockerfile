@@ -22,6 +22,9 @@ RUN chmod +x /app/entrypoint.sh
 # Change the working directory
 WORKDIR /app
 
+# Set up a volume for persistent data (adjust paths as needed)
+VOLUME ["/vault/config", "/vault/data"]
+
 # Expose the Vault port
 EXPOSE 8200
 
