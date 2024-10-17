@@ -9,14 +9,21 @@ ARG VAULT_API_ADDR
 ENV VAULT_ADDR=${VAULT_ADDR}
 ENV VAULT_API_ADDR=${VAULT_API_ADDR}
 
-# Create configuration directory
+# Create the configuration directory
 RUN mkdir -p /vault/config
 
-# Copy your custom Vault configuration file into the Docker image
+# Copy the Vault configuration file into the container
 COPY vault-config.hcl /vault/config/vault-config.hcl
+
+# Ensure the entrypoint script is executable if you have one
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Change the working directory
+WORKDIR /app
 
 # Expose the Vault port
 EXPOSE 8200
 
-# Start Vault server with your custom configuration file
-CMD ["vault", "server", "-config=/vault/config/vault-config.hcl"]
+# Use the entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]
